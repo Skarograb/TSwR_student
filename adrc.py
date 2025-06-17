@@ -17,14 +17,14 @@ end = 5
 traj_gen = Sinusoidal(np.array([0., 1.]), np.array([2., 2.]), np.array([0., 0.]))
 # traj_gen = Poly3(np.array([0., 0.]), np.array([pi/4, pi/6]), end)
 
-b_est_1 = None
-b_est_2 = None
-kp_est_1 = None
-kp_est_2 = None
-kd_est_1 = None
-kd_est_2 = None
-p1 = None
-p2 = None
+b_est_1 = 1
+b_est_2 = 10
+kp_est_1 = 144
+kp_est_2 = 144
+kd_est_1 = 24
+kd_est_2 = 24
+p1 = 100
+p2 = 100
 
 q0, qdot0, _ = traj_gen.generate(0.)
 q1_0 = np.array([q0[0], qdot0[0]])
@@ -36,7 +36,8 @@ Q, Q_d, u, T = simulate("PYBULLET", traj_gen, controller, Tp, end)
 
 eso1 = np.array(controller.joint_controllers[0].eso.states)
 eso2 = np.array(controller.joint_controllers[1].eso.states)
-
+print("eso1 shape:", eso1.shape)
+print("eso1:", eso1)
 plt.subplot(221)
 plt.plot(T, eso1[:, 0])
 plt.plot(T, Q[:, 0], 'r')

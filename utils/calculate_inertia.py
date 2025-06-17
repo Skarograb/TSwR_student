@@ -2,7 +2,8 @@ import xml.etree.ElementTree as ET
 import sys
 
 if __name__ == "__main__":
-    fname = sys.argv[1]
+    #fname = sys.argv[1]
+    fname="/home/szkrabimir/Documents/TSwR/TSwR_student/urdf/planar2dof.urdf"
     urdf = ET.parse(fname)
     for link in urdf.findall('link'):
         m = -1.
@@ -34,5 +35,6 @@ if __name__ == "__main__":
             inertia = inertial.find("inertia")
             inertia.attrib = {k: f"{eval(k):.5f}" for k in ["ixx", "ixy", "ixz", "iyy", "iyz", "izz"]}
             a = 0
-    urdf.write(sys.argv[1])
+    #urdf.write(sys.argv[1])
+    urdf.write(fname)
 
